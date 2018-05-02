@@ -1,0 +1,6 @@
+# write these lines in the beginning
+inv_mon_name = pickle.load(open("inv_mon_name.p", "rb"))
+inv_monsoldper_name = pickle.load(open("inv_monsoldper_name.p", "rb"))
+l = pickle.load(open("l.p", "rb"))
+lis_inv = pickle.load(open("lis_inv.p", "rb"))
+lis_inv_sold_per = pickle.load(open("lis_inv_sold_per.p", "rb"))
