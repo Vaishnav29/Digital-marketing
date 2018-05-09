@@ -275,5 +275,31 @@ for i in range(len(dataset2)):
                 print('WW1')
                 inv_dict[dataset2['Product Name'][i]] += (0*temp)//100
                 
+#Code for Pricing according to best, worst and moderate product
+new_data= data1
+new_dict= {}
+for i in range(0,600):
+    if (i<.2*len(new_data)):
+        new_dict[new_data['d_product'][i]]= 'B'
+        new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
+        new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
+              
+    elif (i>=.8*600):
+        new_dict[new_data['d_product'][i]]= 'W'
+        if(new_data['d_quantity'][i] >= 5):
+        #new_data['d_MRP'][i]= new_data['d_MRP'][i]+new_data['d_MRP'][i]*0.2
+            new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
+            #print(new_data['d_product'][i])
+            new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
+        else:
+            new_data['d_MRP'][i]=new_data['d_inventory'][i]-new_data['d_inventory'][i]*0.2
+
+            new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
+
+    else:
+        new_dict[new_data['d_product'][i]]= 'M'
+        new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
+        new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]        
+                
 
 
