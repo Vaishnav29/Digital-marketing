@@ -3,6 +3,8 @@ import pandas as pd
 import pickle
 import sys
 import os
+
+global i
 #import ScrolledText
 At_Risk_Customers = pickle.load(open("At_Risk_Customers_cust1.p", "rb"))
 Bigspenders = pickle.load(open("Bigspenders_cust1.p", "rb"))
@@ -49,6 +51,11 @@ sub.set(UniqueCats[0])
 subDropdown = OptionMenu(root,sub,*UniqueCats)
 subDropdown.place(relx = 0.68, rely = 0.08)
 
+cc = Label(root,text='Customer ID',width=20,relief='ridge')
+cc.place(relx = 0.68, rely = 0.21)
+
+tc = Label(root,text='Total Customers in the category:',width=35)
+tc.place(relx = 0.53, rely = 0.7)
 
 def getproduct():
     global uniquep
@@ -139,28 +146,165 @@ def getproduct():
     for i in uniquep:
         listbox2.insert(END, i)
     listbox2.forget()    
-    
+
 def getcustomer():
     print(sub.get())
     i = 1
     global cust
+    global p
+    
     cust = []
     listbox3 = Listbox(root, width = 30, height = 15)
-    listbox4 = Listbox(root, width = 30, height = 20)
+    listbox4 = Listbox(root, height = 0, width = 3)
+    listbox4.place(relx = 0.78, rely = 0.7)
     
     if sub.get() == UniqueCats[0]:
+        cust.clear()
         for key,val in Custid.items():
             if val == UniqueCats[0]:      
                 listbox3.insert(END, '{}. {}'.format(i, key))
                 i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[1]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[1]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[2]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[2]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[3]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[3]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[4]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[4]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[5]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[5]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[6]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[6]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[7]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[7]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
     
-    listbox3.place(relx = 0.75, rely = 0.4, anchor = "center")
+    if sub.get() == UniqueCats[8]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[8]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)            
+    if sub.get() == UniqueCats[9]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[9]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+    if sub.get() == UniqueCats[10]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[10]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)            
+    if sub.get() == UniqueCats[11]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[11]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+     
+    if sub.get() == UniqueCats[12]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[12]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[13]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[13]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)            
+    if sub.get() == UniqueCats[14]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[14]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)            
+    if sub.get() == UniqueCats[15]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[15]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)
+                
+    if sub.get() == UniqueCats[16]:
+        cust.clear()
+        for key,val in Custid.items():
+            if val == UniqueCats[16]:      
+                listbox3.insert(END, '{}. {}'.format(i, key))
+                i +=1
+                cust.append(key)  
+    p = len(cust)
+    #listbox4.destroy()
+    #listbox4 = Listbox(root, height = 0, width = 0)
+    #listbox4.place(relx = 0.78, rely = 0.7)
+    listbox4.insert(END, p)      
+    listbox3.place(relx = 0.75, rely = 0.47, anchor = "center")
+
+
  
 clb= Button(root,text="Select",command= getproduct, width = 10)
 clb.place(relx = 0.37, rely = 0.08)
 
 slb= Button(root,text="Select", command = getcustomer, width = 10)
 slb.place(relx = 0.81, rely = 0.08)
+
+sp = Button(root, text = "Send Promotions", width = 20)
+sp.place(relx = 0.12, rely = 0.85)
 
 root.mainloop()
 
