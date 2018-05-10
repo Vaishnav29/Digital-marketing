@@ -306,6 +306,9 @@ slb.place(relx = 0.81, rely = 0.08)
 sp = Button(root, text = "Send Promotions", width = 20)
 sp.place(relx = 0.12, rely = 0.85)
 
+sp1 = Button(root, text = "Send Promotions", width = 20)
+sp1.place(relx = 0.7, rely = 0.85)
+
 root.mainloop()
 
 
