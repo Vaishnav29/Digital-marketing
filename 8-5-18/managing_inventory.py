@@ -278,28 +278,76 @@ for i in range(len(dataset2)):
 #Code for Pricing according to best, worst and moderate product
 new_data= data1
 new_dict= {}
-for i in range(0,600):
+new_list= list(dataset['Product Name'].unique())
+l_best =[]
+l_moderate=[]
+l_worst_high=[]
+l_worst_low =[]
+not_sold=[]
+for i in range(0,len(new_data)):
     if (i<.2*len(new_data)):
+        l_best.append(new_data['d_product'][i])
         new_dict[new_data['d_product'][i]]= 'B'
         new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
         new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
               
-    elif (i>=.8*600):
+    elif (i>=.8*len(new_data)):
         new_dict[new_data['d_product'][i]]= 'W'
         if(new_data['d_quantity'][i] >= 5):
+            l_worst_high.append(new_data['d_product'][i])
         #new_data['d_MRP'][i]= new_data['d_MRP'][i]+new_data['d_MRP'][i]*0.2
             new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
             #print(new_data['d_product'][i])
             new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
         else:
+            l_worst_low.append(new_data['d_product'][i])
             new_data['d_MRP'][i]=new_data['d_inventory'][i]-new_data['d_inventory'][i]*0.2
 
             new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
 
     else:
+        l_moderate.append(new_data['d_product'][i])
         new_dict[new_data['d_product'][i]]= 'M'
+        
         new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
         new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]        
-                
 
+for i in range(0,len(new_list)):
+    flag=0
+    for j in range(0,len(new_data)):
+        if new_list[i]==new_data['d_product'][j]:
+            flag=1
+            break
+    if flag==0:
+        not_sold.append(new_list[i])
 
+import pickle    
+pickle_out = open("Pricing_data.p","wb")
+pickle.dump(new_list,pickle_out)
+pickle_out.close()
+s=pickle.load(open("Pricing_data.p", "rb"))   
+
+pickle_out = open("Pricing_BestProduct.p","wb")
+pickle.dump(l_best,pickle_out)
+pickle_out.close()
+t=pickle.load(open("Pricing_BestProduct.p", "rb")) 
+  
+pickle_out = open("Pricing_ModerateProduct.p","wb")
+pickle.dump(l_moderate,pickle_out)
+pickle_out.close()
+u=pickle.load(open("Pricing_ModerateProduct.p", "rb")) 
+
+pickle_out = open("Pricing_WorstHighProduct.p","wb")
+pickle.dump(l_worst_high,pickle_out)
+pickle_out.close()
+v=pickle.load(open("Pricing_WorstHighProduct.p", "rb")) 
+
+pickle_out = open("Pricing_WorstLowProduct.p","wb")
+pickle.dump(l_worst_low,pickle_out)
+pickle_out.close()
+v=pickle.load(open("Pricing_WorstLowProduct.p", "rb")) 
+
+pickle_out = open("not_sold_Product.p","wb")
+pickle.dump(not_sold,pickle_out)
+pickle_out.close()
+w=pickle.load(open("not_sold_Product.p", "rb")) 
