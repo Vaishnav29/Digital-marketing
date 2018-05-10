@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 import sys
 import os
-
+import smtplib
 global i
 #import ScrolledText
 At_Risk_Customers = pickle.load(open("At_Risk_Customers_cust1.p", "rb"))
@@ -56,6 +56,26 @@ cc.place(relx = 0.68, rely = 0.21)
 
 tc = Label(root,text='Total Customers in the category:',width=35)
 tc.place(relx = 0.53, rely = 0.7)
+
+def sendmail():
+    
+    
+    mailids=['reddy.vaishnav96@gmail.com','prasadgautham95@gmail.com','bhavanatangirala25@gmail.com','shyamalayadav09@gmail.com','rahulmonish.mec@gmail.com']
+    for i in mailids:
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        # Authentication
+        s.login("musicmetalmania@gmail.com","musicmetalmania123")
+         
+        # message to be sent
+        message = "Digital Marketing Welcomes you to our World , You are having offers on our products, so please come and visit our store"
+         
+        # sending the mail
+        s.sendmail("musicmetalmania@gmail.com", i, message)
+         
+        # terminating the session
+        s.quit()
+
 
 def getproduct():
     global uniquep
@@ -306,7 +326,7 @@ slb.place(relx = 0.81, rely = 0.08)
 sp = Button(root, text = "Send Promotions", width = 20)
 sp.place(relx = 0.12, rely = 0.85)
 
-sp1 = Button(root, text = "Send Promotions", width = 20)
+sp1 = Button(root, text = "Send Promotions",command= sendmail, width = 20)
 sp1.place(relx = 0.7, rely = 0.85)
 
 root.mainloop()
