@@ -22,62 +22,8 @@ root = Tk()
 root.geometry("900x600")
 root.title("Target Marketing")
 
-# cluster
-Cluster = ['Best Customers','Loyal Customers','Big Spenders','Promising Customers','Customers Needing Attention','At Risk Customers','Cannot lose these customers','Lost Customers','Lost Inconsequential Customers']
-UniqueCats = list(data['Sub-Category'].unique())
-catLabel = Label(root,text='Select a Cluster')
-catLabel.place(relx = 0.03, rely = 0.09)
 
-cat = StringVar(root)
-cat.set(Cluster[0])
-catDropdown = OptionMenu(root,cat,*Cluster)
-catDropdown.place(relx = 0.13, rely = 0.08)
-
-l1 = Label(root,text='-'*300)
-l1.place(relx = 0, rely = 0.18)
-
-bp = Label(root,text='Customer ID - Best Categories',width=25,relief='ridge')
-bp.place(relx = 0.1, rely = 0.21)
-
-offerLabel = Label(root,text='Offers: ')
-offerLabel.place(relx = 0.05, rely = 0.55)
-
-# sub categories
-subLabel = Label(root,text='Select Sub-Category')
-subLabel.place(relx = 0.55, rely = 0.09)
-
-sub = StringVar(root)
-sub.set(UniqueCats[0])
-subDropdown = OptionMenu(root,sub,*UniqueCats)
-subDropdown.place(relx = 0.68, rely = 0.08)
-
-cc = Label(root,text='Customer ID',width=20,relief='ridge')
-cc.place(relx = 0.68, rely = 0.21)
-
-tc = Label(root,text='Total Customers in the category:',width=35)
-tc.place(relx = 0.53, rely = 0.7)
-
-def sendmail():
-    
-    
-    mailids=['reddy.vaishnav96@gmail.com','prasadgautham95@gmail.com','bhavanatangirala25@gmail.com','shyamalayadav09@gmail.com','rahulmonish.mec@gmail.com']
-    for i in mailids:
-        s = smtplib.SMTP('smtp.gmail.com', 587)
-        s.starttls()
-        # Authentication
-        s.login("musicmetalmania@gmail.com","musicmetalmania123")
-         
-        # message to be sent
-        message = "Digital Marketing Welcomes you to our World , You are having offers on our products, so please come and visit our store"
-         
-        # sending the mail
-        s.sendmail("musicmetalmania@gmail.com", i, message)
-         
-        # terminating the session
-        s.quit()
-
-
-def getproduct():
+def getproduct(value):
     global uniquep
     global listbox2
     uniquep = set()    
@@ -167,7 +113,7 @@ def getproduct():
         listbox2.insert(END, i)
     listbox2.forget()    
 
-def getcustomer():
+def getcustomer(value):
     print(sub.get())
     i = 1
     global cust
@@ -314,6 +260,64 @@ def getcustomer():
     #listbox4.place(relx = 0.78, rely = 0.7)
     listbox4.insert(END, p)      
     listbox3.place(relx = 0.75, rely = 0.47, anchor = "center")
+
+# cluster
+Cluster = ['Best Customers','Loyal Customers','Big Spenders','Promising Customers','Customers Needing Attention','At Risk Customers','Cannot lose these customers','Lost Customers','Lost Inconsequential Customers']
+UniqueCats = list(data['Sub-Category'].unique())
+catLabel = Label(root,text='Select a Cluster')
+catLabel.place(relx = 0.03, rely = 0.09)
+
+cat = StringVar(root)
+cat.set(Cluster[0])
+catDropdown = OptionMenu(root,cat,*Cluster, command=getproduct)
+catDropdown.place(relx = 0.13, rely = 0.08)
+
+l1 = Label(root,text='-'*300)
+l1.place(relx = 0, rely = 0.18)
+
+bp = Label(root,text='Customer ID - Best Categories',width=25,relief='ridge')
+bp.place(relx = 0.1, rely = 0.21)
+
+offerLabel = Label(root,text='Offers: ')
+offerLabel.place(relx = 0.05, rely = 0.55)
+
+# sub categories
+subLabel = Label(root,text='Select Sub-Category')
+subLabel.place(relx = 0.55, rely = 0.09)
+
+sub = StringVar(root)
+sub.set(UniqueCats[0])
+subDropdown = OptionMenu(root,sub,*UniqueCats,command=getcustomer)
+subDropdown.place(relx = 0.68, rely = 0.08)
+
+cc = Label(root,text='Customer ID',width=20,relief='ridge')
+cc.place(relx = 0.68, rely = 0.21)
+
+tc = Label(root,text='Total Customers in the category:',width=35)
+tc.place(relx = 0.53, rely = 0.7)
+
+def sendmail():
+    
+    
+    mailids=['reddy.vaishnav96@gmail.com','prasadgautham95@gmail.com','bhavanatangirala25@gmail.com','shyamalayadav09@gmail.com','rahulmonish.mec@gmail.com']
+    for i in mailids:
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        # Authentication
+        s.login("musicmetalmania@gmail.com","musicmetalmania123")
+         
+        # message to be sent
+        message = "Digital Marketing Welcomes you to our World , You are having offers on our products, so please come and visit our store"
+         
+        # sending the mail
+        s.sendmail("musicmetalmania@gmail.com", i, message)
+         
+        # terminating the session
+        s.quit()
+
+
+
+
 
 
  
