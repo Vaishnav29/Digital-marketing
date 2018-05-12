@@ -22,6 +22,7 @@ data = pickle.load(open("data.p", "rb"))
 root = Tk()
 root.geometry("900x600")
 root.title("Target Marketing")
+root.resizable(0,0)
 
 one = ['reddy.vaishnav96@gmail.com']
 two = ['prasadgautham95@gmail.com']
