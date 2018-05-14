@@ -276,51 +276,70 @@ for i in range(len(dataset2)):
                 inv_dict[dataset2['Product Name'][i]] += (0*temp)//100
                 
 #Code for Pricing according to best, worst and moderate product
-new_data= data1
-new_dict= {}
-new_list= list(dataset['Product Name'].unique())
-l_best ={}
-l_moderate={}
-l_worst_high={}
-l_worst_low ={}
-not_sold={}
-for i in range(0,len(new_data)):
-    if (i<.2*len(new_data)):
-        new_dict[new_data['d_product'][i]]= 'B'
-        new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
-        new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
-        l_best[(new_data['d_product'][i])]= new_data['d_profit'][i]   
-    elif (i>=.8*len(new_data)):
-        new_dict[new_data['d_product'][i]]= 'W'
-        if(new_data['d_quantity'][i] >= 5):
-        #new_data['d_MRP'][i]= new_data['d_MRP'][i]+new_data['d_MRP'][i]*0.2
-            new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
-            #print(new_data['d_product'][i])
-            new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
-            l_worst_high[(new_data['d_product'][i])]= new_data['d_profit'][i]   
+    new_data= data1
+    new_dict= {}
+    new_list= list(dataset['Product Name'].unique())
+    l_best ={}
+    l_moderate={}
+    l_worst_high={}
+    l_worst_low ={}
+    not_sold={}
+    discount = int(input('Enter the Discount in % '))
+    for i in range(0,len(new_data)):
+        if (i<.2*len(new_data)):
+            #new_dict[new_data['d_product'][i]]= 'B'
+            #new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*discount
+            #new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
+            l_best[(new_data['d_product'][i])]= new_data['d_profit'][i]   
+        elif (i>=.8*len(new_data)):
+            #new_dict[new_data['d_product'][i]]= 'W'
+            if(new_data['d_quantity'][i] >= 5):
+            #new_data['d_MRP'][i]= new_data['d_MRP'][i]+new_data['d_MRP'][i]*0.2
+                #new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*discount
+                #print(new_data['d_product'][i])
+                #new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
+                l_worst_high[(new_data['d_product'][i])]= new_data['d_profit'][i]   
+            else:
+                
+                #new_data['d_MRP'][i]=new_data['d_inventory'][i]-new_data['d_inventory'][i]*discount
+    
+                #new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
+                l_worst_low[(new_data['d_product'][i])]= new_data['d_profit'][i] 
         else:
+            #new_dict[new_data['d_product'][i]]= 'M'
             
-            new_data['d_MRP'][i]=new_data['d_inventory'][i]-new_data['d_inventory'][i]*0.2
-
-            new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]
-            l_worst_low[(new_data['d_product'][i])]= new_data['d_profit'][i] 
-    else:
-        new_dict[new_data['d_product'][i]]= 'M'
+            #new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*discount
+            #new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]        
+            l_moderate[(new_data['d_product'][i])]= new_data['d_profit'][i] 
+    
+# =============================================================================
+#     string= "best"
+#     string2= "l_"+string
+#     final=eval(string2)
+#     final_list = list(final.values())
+#     for i in range(0,len(final)):
+#         final_list[i] *= discount
+# =============================================================================
+    
+    string= "best"
+    string2= "l_"+string
+    final=eval(string2)
+    final_list = list(final.keys())
+    for i in range(0,len(final)):
+        key = final.Keys.ElementAt(i);
+        final[key] *= discount
         
-        new_data['d_MRP'][i]=new_data['d_inventory'][i]+new_data['d_inventory'][i]*0.1
-        new_data['d_profit'][i]=(new_data['d_MRP'][i]-new_data['d_inventory'][i])*new_data['d_quantity'][i]        
-        l_moderate[(new_data['d_product'][i])]= new_data['d_profit'][i] 
+    
+    for i in range(0,len(new_list)):
+        flag=0
+        for j in range(0,len(new_data)):
+            if new_list[i]==new_data['d_product'][j]:
+                flag=1
+                break
+        if flag==0:
+            not_sold[(new_list[i])]= "Not Sold" 
 
-for i in range(0,len(new_list)):
-    flag=0
-    for j in range(0,len(new_data)):
-        if new_list[i]==new_data['d_product'][j]:
-            flag=1
-            break
-    if flag==0:
-        not_sold[(new_list[i])]= "Not Sold" 
-
-
+    
 import pickle    
 pickle_out = open("Pricing_data.p","wb")
 pickle.dump(new_list,pickle_out)
