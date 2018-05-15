@@ -1,6 +1,7 @@
 from tkinter import *
 import pandas as pd
 import pickle
+from tkinter import messagebox
 
 data = pickle.load(open('pcat.p', 'rb'))
 last3 = pickle.load(open('last3mon.p', 'rb'))
@@ -56,7 +57,12 @@ def getpname(*val):
         listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
         listi.insert(END, 'Best Product')
         listi.insert(END, 'Predicted sales: {}'.format(pre))
-        
+        if(val < 15):
+            messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increse the inventory for this product!!!")
+        else:
+            messagebox.showinfo("Inventory alert", "Enough inventory. No need to increse inventory for this product!!!")
+            
+            
     elif v in h2:
         for j in range(len(last3)):
             if last3['d_product'][j] == v:
@@ -73,6 +79,12 @@ def getpname(*val):
         listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
         listi.insert(END, 'Moderate Product')
         listi.insert(END, 'Predicted sales: {}'.format(pre))
+        if(val < 15):
+            messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increse the inventory for this product!!!")
+        else:
+            messagebox.showinfo("Inventory alert", "Enough inventory. No need to increse inventory for this product!!!")
+            
+        
     elif v in h3:
         for j in range(len(last3)):
             if last3['d_product'][j] == v:
@@ -90,17 +102,28 @@ def getpname(*val):
         listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
         listi.insert(END, 'Worst Product')
         listi.insert(END, 'Predicted sales: {}'.format(pre))
+        if(val < 15):
+            messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increse the inventory for this product!!!")
+        else:
+            messagebox.showinfo("Inventory alert", "Enough inventory. No need to increse inventory for this product!!!")
+            
+        
     else:
         val =  lis_inv[inv_mon_name[-1]][v]
         print("Remaining quantity in inventory", val)
         #count+=1
-        print('Not Sold in THREE MONTHS')
+        print('Not Sold in last THREE MONTHS!!!')
         pre = pred[v]
         print("Predicted sales:", pre)
         listi.delete(0, END)
-        listi.insert(END, 'Quantity sold in last 3 months: {}'.format(ltq))
         listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
+        listi.insert(END, 'Not Sold in last THREE MONTHS!!!')
         listi.insert(END, 'Predicted sales: {}'.format(pre))
+        if(val < 15):
+            messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increse the inventory for this product!!!")
+        else:
+            messagebox.showinfo("Inventory alert", "Enough inventory. No need to increse inventory for this product!!!")
+            
         
 def getYM():
     global s
