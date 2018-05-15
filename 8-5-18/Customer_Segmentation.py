@@ -124,6 +124,12 @@ rfm_segmentation['RFMScore'] = rfm_segmentation.R_Quartile.map(str) \
                             + rfm_segmentation.M_Quartile.map(str)
 rfm_segmentation.head()
 
+#pickle files 
+import pickle
+pickle.dump(rfm_segmentation,open("Segmentation.p","wb"))
+
+
+
 rfm_segmentation[rfm_segmentation['RFMScore']=='444'].sort_values('Monetary', ascending=False).head(10)
 best = len(rfm_segmentation[rfm_segmentation['RFMScore']=='444']) 
 print('Best Customers:',best) #recency , frequency and monetary is high
