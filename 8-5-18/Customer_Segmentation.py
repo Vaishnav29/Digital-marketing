@@ -22,7 +22,7 @@ import seaborn as sns
 
 #warnings.filterwarnings("ignore")
 
-retail_df = pd.read_excel(r'C:\Users\user.A713DCOK\Desktop\store-dataset.xlsx')
+retail_df = pd.read_excel(r'C:\Users\user\Desktop\store-dataset.xlsx')
 retail_df.head()
 
 print("Summary..")
@@ -140,7 +140,7 @@ print('Big Spenders:',potential) #Recent customers, but spent a good amount and 
 promising = len(rfm_segmentation[rfm_segmentation['R_Quartile']==4])
 print('Promising Customers: ',promising) #Recent shoppers, but haven’t spent much.
 attention = len(rfm_segmentation[rfm_segmentation['RFMScore']=='222']) + len(rfm_segmentation[rfm_segmentation['RFMScore']=='333'])
-print('Customers Needing Attention : ',attention) #Above average recency, frequency and monetary values. May not have bought very recently though
+print('Customers Needed Attention : ',attention) #Above average recency, frequency and monetary values. May not have bought very recently though
 at_risk = len(rfm_segmentation[rfm_segmentation['RFMScore']=='244'])
 print('At Risk Customers: ',at_risk ) #Spent big money and purchased often. But long time ago. Need to bring them back!
 cant_lose = len(rfm_segmentation[rfm_segmentation['RFMScore']=='114'])
@@ -155,15 +155,18 @@ print('Lost Inconsequential Customers: ',cheap) #lowest receny, frequency, monet
 
 #PIE-CHART
 fracs = [best,loyal,potential,promising,attention,at_risk,cant_lose,lost,cheap]
-labels = ['Best','Loyal', 'Potential','Promising', 'Attention', 'At_risk','Cant_lose','Lost','Cheap ']
-#fracs =[best,loyal,potential,promising,attention,at_risk,cant_lose,lost,cheap]
+label = ['Best Customers','Loyal Customers','Big Spenders','Promising Customers','Customers Needed Attention','At Risk Customers','Cannot lose these customers','Lost Customers','Lost Inconsequential Customers']
 explode = [0,0,0,0,0.2,0.2,0.2,0.2,0.2]
 fig = plt.figure(figsize=[10, 10])
 plt.pie(fracs,labels=labels,explode=explode,autopct='%1.1f%%')#startangle=90)
 plt.title('Customer Segmentation')
 plt.show()
+
+#Seasonal Customers
 seasonal = total - (best+loyal+potential+promising+attention+at_risk+cant_lose+lost+cheap)
 print('Seasonal Customers:',seasonal)
+
+#rfm_data
 rfm_data = rfm_df.drop(['R_Quartile','F_Quartile','M_Quartile','RFMScore'],axis=1)
 rfm_data.head()
 rfm_data.corr()
