@@ -2,6 +2,8 @@ from tkinter import *
 import pickle
 global fur
 global q
+
+# loading dumped datafiles
 fur = sorted(pickle.load(open("fur1.p", "rb")))
 off = sorted(pickle.load(open("off1.p", "rb")))
 tec = sorted(pickle.load(open("tec1.p", "rb")))
@@ -9,7 +11,7 @@ product = pickle.load(open("Product_Recommendation.p", "rb"))
 data = pickle.load(open("4yrsBMW.p", "rb"))
 data = data[:370]
 
-
+# window configuration
 root = Tk()
 root.title("Personalized Experience (Product Recommendation)")
 root.configure(background='#7E85AB')
@@ -17,7 +19,7 @@ root.geometry("900x600")
 root.resizable(0,0)
 
 
-
+#Function to return furniture products
 def doprintfur(val):
     
     print(fu.get())
@@ -37,7 +39,7 @@ def doprintfur(val):
     for a in Recommendations[:5]:
         listb.insert(END, '{}. {}'.format(b, a))
         b+=1
-            
+#Function to return Office products            
 def doprintoff(val):
     
     print(of.get())
@@ -58,7 +60,7 @@ def doprintoff(val):
         listb.insert(END, '{}. {}'.format(b, a))
         b+=1
 
-
+#Function to return Technology products
 def doprinttec(val):
     global Recommendations
     Recommendations = []
