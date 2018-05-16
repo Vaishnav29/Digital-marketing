@@ -2,6 +2,7 @@ from tkinter import *
 import pandas as pd
 import pickle
 from tkinter import messagebox
+from tkinter import font
 
 # loading dumped datafiles(pickles from managing_inventory.py)
 data = pickle.load(open('pcat.p', 'rb'))
@@ -47,10 +48,11 @@ def getpname(*val):
         pre = pred[v]
         print("Predicted sales:", pre)
         listi.delete(0, END)
-        listi.insert(END, 'Quantity sold in last 3 months: {}'.format(ltq))
-        listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
-        listi.insert(END, 'Best Product')
-        listi.insert(END, 'Predicted sales: {}'.format(pre))
+        listi.insert(END, '                         Best Product')
+        listi.itemconfig(END, foreground="green")
+        listi.insert(END, 'Quantity sold in last 3 months     : {}'.format(ltq))
+        listi.insert(END, 'Remaining quantity in inventory : {}'.format(val))
+        listi.insert(END, 'Predicted sales                                : {}'.format(pre))
         if(val < 15):
             messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increase the inventory for this product!!!")
         
@@ -67,10 +69,11 @@ def getpname(*val):
         pre = pred[v]
         print("Predicted sales:", pre)
         listi.delete(0, END)
-        listi.insert(END, 'Quantity sold in last 3 months: {}'.format(ltq))
-        listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
-        listi.insert(END, 'Moderate Product')
-        listi.insert(END, 'Predicted sales: {}'.format(pre))
+        listi.insert(END, '                         Moderate Product')
+        listi.itemconfig(END, foreground="blue")
+        listi.insert(END, 'Quantity sold in last 3 months     : {}'.format(ltq))
+        listi.insert(END, 'Remaining quantity in inventory : {}'.format(val))
+        listi.insert(END, 'Predicted sales                                : {}'.format(pre))
         if(val < 15):
             messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increase the inventory for this product!!!")
         
@@ -86,10 +89,11 @@ def getpname(*val):
         pre = pred[v]
         print("Predicted sales:", pre)
         listi.delete(0, END)
-        listi.insert(END, 'Quantity sold in last 3 months: {}'.format(ltq))
-        listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
-        listi.insert(END, 'Worst Product')
-        listi.insert(END, 'Predicted sales: {}'.format(pre))
+        listi.insert(END, '                         Worst Product')
+        listi.itemconfig(END, foreground="red")
+        listi.insert(END, 'Quantity sold in last 3 months     : {}'.format(ltq))
+        listi.insert(END, 'Remaining quantity in inventory : {}'.format(val))
+        listi.insert(END, 'Predicted sales                                : {}'.format(pre))
         if(val < 15):
             messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increase the inventory for this product!!!")
 
@@ -101,9 +105,10 @@ def getpname(*val):
         pre = pred[v]
         print("Predicted sales:", pre)
         listi.delete(0, END)
-        listi.insert(END, 'Remaining quantity in inventory: {}'.format(val))
-        listi.insert(END, 'Not Sold in last THREE MONTHS!!!')
-        listi.insert(END, 'Predicted sales: {}'.format(pre))
+        listi.insert(END, '                 Not Sold in last THREE MONTHS!!!')
+        listi.itemconfig(END, foreground="purple")
+        listi.insert(END, 'Remaining quantity in inventory     : {}'.format(val))
+        listi.insert(END, 'Predicted sales                                : {}'.format(pre))
         if(val < 15):
             messagebox.showinfo("Add inventory alert", "This product quantity is running low. Increase the inventory for this product!!!")
        
