@@ -49,7 +49,7 @@ seventeen=['shyamalayadav09@gmail.com']
 subcust=[]
 subcust=[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen]
 
-# Sending mails to people interested in particular sub-category
+# 
 def sendmail():
     print(k)
     global message
@@ -90,7 +90,6 @@ nine1=['reddy.vaishnav96@gmail.com']
 subcust1=[]
 subcust1=[one1,two1,three1,four1,five1,six1,seven1,eight1,nine1]
 
-# Sending mails to people of particular cluster liking list of products
 def sendmail1():
     print(x)
     global message
@@ -124,7 +123,6 @@ def sendmail1():
         messagebox.showinfo("Status", "Promotions have been sent!!!")
         s.quit()
 
-# function to get list of customers and their favorite product category, from a particular cluster
 def getproduct(value):
     global uniquep
     global listbox2
@@ -219,7 +217,6 @@ def getproduct(value):
         listbox2.insert(END, i)
     listbox2.forget()    
 
-# function to get list of customers interested in particular product sub category
 def getcustomer(value):
     print(sub.get())
     i = 1
@@ -259,9 +256,10 @@ UniqueCats = list(data['Sub-Category'].unique())
 catLabel = Label(root,text='Select a Cluster', background='#7E85AB', fg = 'white')
 catLabel.place(relx = 0.03, rely = 0.09)
 
-getproduct('val')
 cat = StringVar(root)
 cat.set(Cluster[0])
+
+getproduct('val')
 catDropdown = OptionMenu(root,cat,*Cluster, command=getproduct)
 catDropdown.configure(fg = 'black')
 catDropdown.place(relx = 0.13, rely = 0.08)
@@ -275,9 +273,6 @@ bp.place(relx = 0.1, rely = 0.21)
 offerLabel = Label(root,text='Offers: ', background='#7E85AB', fg = 'white')
 offerLabel.place(relx = 0.05, rely = 0.55)
 
-sp = Button(root, text = "Send Promotions",command= sendmail1 ,width = 20, fg = 'black')
-sp.place(relx = 0.12, rely = 0.85)
-
 # sub categories
 listbox3 = Listbox(root, width = 30, height = 15)
 listbox3.place(relx = 0.75, rely = 0.47, anchor = "center")
@@ -287,9 +282,10 @@ listbox4.place(relx = 0.78, rely = 0.73)
 subLabel = Label(root,text='Select Sub-Category', background='#7E85AB', fg = 'white')
 subLabel.place(relx = 0.55, rely = 0.09)
 
-getcustomer('val')
+
 sub = StringVar(root)
 sub.set(UniqueCats[0])
+getcustomer('val')
 subDropdown = OptionMenu(root,sub,*UniqueCats,command=getcustomer)
 subDropdown.configure(fg = 'black')
 subDropdown.place(relx = 0.68, rely = 0.08)
@@ -299,6 +295,9 @@ cc.place(relx = 0.68, rely = 0.21)
 
 tc = Label(root,text='Total Customers in the category:', background='#7E85AB', fg = 'white')
 tc.place(relx = 0.58, rely = 0.73)
+
+sp = Button(root, text = "Send Promotions",command= sendmail1 ,width = 20, fg = 'black')
+sp.place(relx = 0.12, rely = 0.85)
 
 sp1 = Button(root, text = "Send Promotions",command= sendmail, width = 20, fg = 'black')
 sp1.place(relx = 0.7, rely = 0.85)
