@@ -1,12 +1,14 @@
+# Target marketing GUI
 from tkinter import *
 import pandas as pd
 import pickle
 import sys
 import os
 import smtplib
+from tkinter import messagebox
 global i
 
-#import ScrolledText
+# loading dumped datafiles
 At_Risk_Customers = pickle.load(open("At_Risk_Customers_cust1.p", "rb"))
 Bigspenders = pickle.load(open("Bigspenders_cust1.p", "rb"))
 Cannot_lose_these_customers = pickle.load(open("Cannot_lose_these_customers1.p", "rb"))
@@ -19,13 +21,15 @@ Loyal_Customers= pickle.load(open("loyal_cust1.p", "rb"))
 Custid= pickle.load(open("custid.p", "rb"))
 data = pickle.load(open("data.p", "rb"))
 
+# window configuration
 root = Tk()
 root.geometry("900x600")
+root.configure(background='#7E85AB')
 root.title("Target Marketing")
 root.resizable(0,0)
 
 one = ['reddy.vaishnav96@gmail.com']
-two = ['prasadgautham95@gmail.com']
+two = ['premalathanair@gmail.com']
 three=['madhuhasareddy@gmail.com']
 four =['rahulmonish.mec@gmail.com']
 five=['shyamalayadav09@gmail.com']
@@ -42,9 +46,10 @@ fifteen=['madhuhasareddy@gmail.com']
 sixteen =['rahulmonish.mec@gmail.com']
 seventeen=['shyamalayadav09@gmail.com']
 
-
 subcust=[]
 subcust=[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen]
+
+# 
 def sendmail():
     print(k)
     global message
@@ -70,10 +75,11 @@ def sendmail():
         print(message)
          
         # terminating the session
+        messagebox.showinfo("Status", "Promotions have been sent!!!")
         s.quit()
 
 one1 = ['reddy.vaishnav96@gmail.com']
-two1 = ['prasadgautham95@gmail.com']
+two1 = ['premalathanair@gmail.com']
 three1=['madhuhasareddy@gmail.com']
 four1 =['rahulmonish.mec@gmail.com']
 five1=['shyamalayadav09@gmail.com']
@@ -114,6 +120,7 @@ def sendmail1():
         print(message)
          
         # terminating the session
+        messagebox.showinfo("Status", "Promotions have been sent!!!")
         s.quit()
 
 def getproduct(value):
@@ -121,12 +128,8 @@ def getproduct(value):
     global listbox2
     uniquep = set()  
     global x
-    
-    listbox1 = Listbox(root, width = 30)
-    listbox2 = Listbox(root, width = 30, height = 10)
-    listbox2.place(relx = 0.1, rely = 0.55) 
     i = 1
-    
+    listbox1.delete(0, END)
     print(cat.get())
     if cat.get() == 'Best Customers':
         x = Cluster.index(cat.get())
@@ -209,9 +212,7 @@ def getproduct(value):
             i +=1
         uniquep.clear()
         uniquep = set(Lost_Inconsequential_Customers.values())
-        
-    listbox1.place(relx = 0.20, rely = 0.4, anchor = "center")  
-
+    listbox2.delete(0, END)
     for i in uniquep:
         listbox2.insert(END, i)
     listbox2.forget()    
@@ -225,10 +226,7 @@ def getcustomer(value):
     
     
     cust = []
-    listbox3 = Listbox(root, width = 30, height = 15)
-    listbox4 = Listbox(root, height = 0, width = 3)
-    listbox4.place(relx = 0.78, rely = 0.7)
-    
+    listbox3.delete(0, END)
     if sub.get() in UniqueCats:
         k = UniqueCats.index(sub.get())
         print(k)
@@ -241,69 +239,66 @@ def getcustomer(value):
         #message += UniqueCats[k]       
     
     p = len(cust)
-    #listbox4.destroy()
     #listbox4 = Listbox(root, height = 0, width = 0)
     #listbox4.place(relx = 0.78, rely = 0.7)
+    listbox4.delete(0, END)
     listbox4.insert(END, p)      
-    listbox3.place(relx = 0.75, rely = 0.47, anchor = "center")
 
 # cluster
+listbox1 = Listbox(root, width = 30)
+listbox1.place(relx = 0.20, rely = 0.4, anchor = "center")  
+listbox2 = Listbox(root, width = 30, height = 10)
+listbox2.place(relx = 0.1, rely = 0.55) 
+
 global UniqueCats    
 Cluster = ['Best Customers','Loyal Customers','Big Spenders','Promising Customers','Customers Needing Attention','At Risk Customers','Cannot lose these customers','Lost Customers','Lost Inconsequential Customers']
 UniqueCats = list(data['Sub-Category'].unique())
-catLabel = Label(root,text='Select a Cluster')
+catLabel = Label(root,text='Select a Cluster', background='#7E85AB', fg = 'white')
 catLabel.place(relx = 0.03, rely = 0.09)
 
-
-
-
-
+getproduct('val')
 cat = StringVar(root)
 cat.set(Cluster[0])
 catDropdown = OptionMenu(root,cat,*Cluster, command=getproduct)
+catDropdown.configure(fg = 'black')
 catDropdown.place(relx = 0.13, rely = 0.08)
 
-l1 = Label(root,text='-'*300)
+l1 = Label(root,text='-'*300, background='#7E85AB')
 l1.place(relx = 0, rely = 0.18)
 
-bp = Label(root,text='Customer ID - Best Categories',width=25,relief='ridge')
+bp = Label(root,text='Customer ID - Best Categories',width=25, background='#7E85AB', fg = 'white')
 bp.place(relx = 0.1, rely = 0.21)
 
-offerLabel = Label(root,text='Offers: ')
+offerLabel = Label(root,text='Offers: ', background='#7E85AB', fg = 'white')
 offerLabel.place(relx = 0.05, rely = 0.55)
 
 # sub categories
-subLabel = Label(root,text='Select Sub-Category')
+listbox3 = Listbox(root, width = 30, height = 15)
+listbox3.place(relx = 0.75, rely = 0.47, anchor = "center")
+listbox4 = Listbox(root, height = 0, width = 3)
+listbox4.place(relx = 0.78, rely = 0.73)
+
+subLabel = Label(root,text='Select Sub-Category', background='#7E85AB', fg = 'white')
 subLabel.place(relx = 0.55, rely = 0.09)
 
+getcustomer('val')
 sub = StringVar(root)
 sub.set(UniqueCats[0])
 subDropdown = OptionMenu(root,sub,*UniqueCats,command=getcustomer)
+subDropdown.configure(fg = 'black')
 subDropdown.place(relx = 0.68, rely = 0.08)
 
-cc = Label(root,text='Customer ID',width=20,relief='ridge')
+cc = Label(root,text='Customer ID',width=20, background='#7E85AB', fg = 'white')
 cc.place(relx = 0.68, rely = 0.21)
 
-tc = Label(root,text='Total Customers in the category:',width=35)
-tc.place(relx = 0.53, rely = 0.7)
+tc = Label(root,text='Total Customers in the category:', background='#7E85AB', fg = 'white')
+tc.place(relx = 0.58, rely = 0.73)
 
-
-
-
-
- 
-# =============================================================================
-# clb= Button(root,text="Select",command= getproduct, width = 10)
-# clb.place(relx = 0.37, rely = 0.08)
-# 
-# slb= Button(root,text="Select", command = getcustomer, width = 10)
-# slb.place(relx = 0.81, rely = 0.08)
-# =============================================================================
-
-sp = Button(root, text = "Send Promotions",command= sendmail1 ,width = 20)
+sp = Button(root, text = "Send Promotions",command= sendmail1 ,width = 20, fg = 'black')
 sp.place(relx = 0.12, rely = 0.85)
 
-sp1 = Button(root, text = "Send Promotions",command= sendmail, width = 20)
+sp1 = Button(root, text = "Send Promotions",command= sendmail, width = 20, fg = 'black')
 sp1.place(relx = 0.7, rely = 0.85)
+
 
 root.mainloop()
