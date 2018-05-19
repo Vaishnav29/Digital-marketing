@@ -28,16 +28,37 @@ def getprod():
     print(int(sub1.get())-3)
     
     #The Party Starts Here 
-
-
-   
+    
+    f=sub.get()
+    
+    g= sub1.get()
+    global a 
+    a= int(f)
+    global b 
+    b=int(g)
+    print(a,b)
+    if b==3:
+        b= 12
+        a-=1
+    elif b==2:
+        b= 11
+        a-=1
+    elif b==1:
+        b=10
+        a-=1
+    print(a,b)
     global data
     global dict1    
     data= pickle.load(open('logdata.p','rb'))  
     dict1= pickle.load(open('logdict.p','rb'))  
-  
-    y = pd.DatetimeIndex(data['Order Date']).year == int(sub.get())
-    m = pd.DatetimeIndex(data['Order Date']).month== int(sub1.get())-3
+    if sub1.get()==1 or sub1.get()==2 or sub1.get()==3:
+        
+        y = pd.DatetimeIndex(data['Order Date']).year == int(a)
+        m = pd.DatetimeIndex(data['Order Date']).month== int(b)
+    
+    else:
+        y = pd.DatetimeIndex(data['Order Date']).year == int(a)
+        m = pd.DatetimeIndex(data['Order Date']).month== int(b)-3
     i=0
     p=0
     for i in range(len(data)):
