@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+#creating dictinories for monthly sales
 lis_inv = {}
 inv_mon_name = []
 count = 1
@@ -42,15 +42,7 @@ a = pd.DatetimeIndex(dataset1['Order Date']).year == 2014
 b = pd.DatetimeIndex(dataset1['Order Date']).month == 1
 
 
-# =============================================================================
-# for i in range(len(dataset2)):
-#     if(a[i]== True and b[i] == True):
-#         count += 1
-#     
-# dataset2 = dataset1.iloc[int(count):,:]
-# dataset2 = dataset2.reset_index(drop=True)
-# =============================================================================
-
+#code for creating all the monthly sales dictionaries
 year = 2014 
 month = 1
 count = 0
