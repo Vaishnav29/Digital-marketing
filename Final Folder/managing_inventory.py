@@ -37,10 +37,6 @@ l = list(dataset2['Product Name'].unique())
 inv_dict = {}
 inv_dict = lis_inv[inv_mon_name[((x - 2014)*12 + y)-1]]
 
-# =============================================================================
-# for i in l:
-#     inv_dict[i] = 500
-# =============================================================================
 
 # sold, remaining % sold, adding inventory
 sold_percent = {}   
@@ -58,10 +54,7 @@ for i in range(len(dataset2)):
         
         
             
-        #dfb = data[data['d_product']==dataset2['Product Name'][i]].index.values.astype(int)[0]  
-                
-        
-        #for j in dataset2['Product Name']:
+      
 
         try:
             
@@ -104,8 +97,7 @@ for i in range(len(dataset2)):
     if(sold_percent[dataset2['Product Name'][i]][1] <= 10.0 and sold_percent[dataset2['Product Name'][i]][1] >= 5.0  ):
         
          
-        #for j in dataset2['Product Name']:
-        #dfb = data[data['d_product']==dataset2['Product Name'][i]].index.values.astype(int)[0]   
+ 
         
         try:
             
