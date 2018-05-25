@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 25 10:11:11 2018
-
-@author: user
-"""
 
 from tkinter import *
 import pandas as pd
