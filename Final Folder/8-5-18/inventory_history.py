@@ -1,8 +1,10 @@
+# importing libraries
 import pandas as pd
 import numpy as np
 import pickle
-quantity = pickle.load(open("quantity.p", "rb"))
+quantity = pickle.load(open("quantity.p", "rb")) # contains 4 years quantity sold for each product
 
+# dictionaries to store 48 months, updated inventory for each month
 lis_inv = {}
 inv_mon_name = []
 count = 1
@@ -12,7 +14,8 @@ for i in range(1,49):
        lis_inv[var]={}
        inv_mon_name.append(var)
        count += 1
-        
+
+# dictionaries to store 48 months, updated percentage sales for each month
 lis_inv_sold_per = {}
 inv_monsoldper_name = []
 count = 1
@@ -43,16 +46,7 @@ for i in range(len(l)):
 a = pd.DatetimeIndex(dataset1['Order Date']).year == 2014
 b = pd.DatetimeIndex(dataset1['Order Date']).month == 1
 
-
-# =============================================================================
-# for i in range(len(dataset2)):
-#     if(a[i]== True and b[i] == True):
-#         count += 1
-#     
-# dataset2 = dataset1.iloc[int(count):,:]
-# dataset2 = dataset2.reset_index(drop=True)
-# =============================================================================
-
+# inventory management section
 year = 2014 
 month = 1
 count = 0
@@ -85,5 +79,3 @@ while(year < 2018 and count <49):
     if(month == 13):        
         month = 1
         year += 1
-
-
