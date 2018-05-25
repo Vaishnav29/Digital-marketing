@@ -1,1 +1,12 @@
 
+https://github.com/Vaishnav29/Digital-marketing/tree/master/Final%20Folder/8-5-18
+https://github.com/Vaishnav29/Digital-marketing/tree/master/Final%20Folder/GUI
+https://github.com/Vaishnav29/Digital-marketing/tree/master/Final%20Folder/bokeh_dashboard
+
+Download above 3 files from Github, Unzip them and place them all in one folder and run the file  Main_GUI_07052018.py which is present in GUI folder.
+System Requirements:
+1.Python 3.6
+2.Anaconda
+3.Bokeh
+
+The File can run from command prompt or from the spyder(Anaconda) also.
