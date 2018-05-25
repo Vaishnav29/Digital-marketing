@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import sys
 import pickle
-sys.path.insert(0,'C:\\Users\\user\\Desktop\\dashboard\\')
+sys.path.insert(0,'C:\\Users\\user\\Downloads\\bokeh_dashboard\\')
 
 from bokeh.io import curdoc
 from bokeh.models.widgets import Tabs
@@ -18,13 +18,13 @@ from trial import sub_cat_bar
 
 #################################################################################
 
-data = pd.read_excel(r'C:\Users\user\Desktop\dashboard\store-dataset1.xlsx')
+data = pd.read_excel(r'C:\Users\user\Downloads\bokeh_dashboard\store-dataset1.xlsx')
 data['Order Date'] = pd.to_datetime(data['Order Date'])
 data['year'],data['month'],data['day'] = data['Order Date'].dt.year, data['Order Date'].dt.month,data['Order Date'].dt.day
 
-lis_inv_sold_per = pickle.load(open(r"C:\\Users\\user\\Desktop\\dashboard\\lis_inv_sold_per.p", "rb"))
-category = pickle.load(open(r"C:\\Users\\user\\Desktop\\dashboard\\mostcategory.p",'rb'))
-subcategory = pickle.load(open(r"C:\\Users\\user\\Desktop\\dashboard\\most_subcategory.p","rb"))
+lis_inv_sold_per = pickle.load(open(r"C:\\Users\\user\\Downloads\\bokeh_dashboard\\lis_inv_sold_per.p", "rb"))
+category = pickle.load(open(r"C:\\Users\\user\\Downloads\\bokeh_dashboard\\mostcategory.p",'rb'))
+subcategory = pickle.load(open(r"C:\\Users\\user\\Downloads\\bokeh_dashboard\\most_subcategory.p","rb"))
 
 sub = list(subcategory.values())
 most_sold = zip(category,sub)
