@@ -1,6 +1,9 @@
 """
 Created on Tue May 15 09:12:07 2018
 @author: Karthik & Bhavana
+desc: Code to divide the data quarter wise(3 months) and find best customers 
+and best products and give recommendations to the cusotmers 
+
 """
 
 import tkinter as tk
@@ -118,36 +121,36 @@ def get_recommendations(quar, num_best_cust, num_best_prod, conf):
     # Start of similarity function
     # =============================================================================
         
-    def pearson_cosine(x,y):
-        if((sum(x) == 0) or (sum(y) == 0)):
+    def pearson_cosine(vec_x,vec_y):
+        if((sum(vec_x) == 0) or (sum(vec_y) == 0)):
             return(0,0)
         else:
             import math
-            sum_x_i = 0
-            sum_y_i = 0
-            sum_yi_2 = 0
-            sum_xi_2 = 0
-            sumx = 0
-            sumy = 0
-            sum_x_y = 0
-            sumx_2 = 0
-            sumy_2 = 0
-            sumxy = 0
-            x_mean = np.mean(x)
-            y_mean = np.mean(y)
-            for i in range(len(x)):
-                sum_x_i += x[i] - x_mean
-                sum_y_i += y[i] - y_mean
-                sum_x_y += (x[i] - x_mean)*(y[i] - y_mean)
-                sum_xi_2 += (x[i] - x_mean)**2
-                sum_yi_2 += (y[i] - y_mean)**2
-                sumx += x[i]
-                sumy += y[i]
-                sumxy += x[i]*y[i]
-                sumx_2 += x[i]*x[i]
-                sumy_2 += y[i]*y[i]
-            pearson_correlation = sum_x_y/(math.sqrt(sum_xi_2)*math.sqrt(sum_yi_2))
-            cosine_similarity = sumxy/(math.sqrt(sumx_2)*math.sqrt(sumy_2))
+            sum_vec_x_i = 0
+            sum_vec_y_i = 0
+            sum_vec_yi_2 = 0
+            sum_vec_xi_2 = 0
+            sumvec_x = 0
+            sumvec_y = 0
+            sum_vec_x_vec_y = 0
+            sumvec_x_2 = 0
+            sumvec_y_2 = 0
+            sumvec_xvec_y = 0
+            vec_x_mean = np.mean(vec_x)
+            vec_y_mean = np.mean(vec_y)
+            for i in range(len(vec_x)):
+                sum_vec_x_i += vec_x[i] - vec_x_mean
+                sum_vec_y_i += vec_y[i] - vec_y_mean
+                sum_vec_x_vec_y += (vec_x[i] - vec_x_mean)*(vec_y[i] - vec_y_mean)
+                sum_vec_xi_2 += (vec_x[i] - vec_x_mean)**2
+                sum_vec_yi_2 += (vec_y[i] - vec_y_mean)**2
+                sumvec_x += vec_x[i]
+                sumvec_y += vec_y[i]
+                sumvec_xvec_y += vec_x[i]*vec_y[i]
+                sumvec_x_2 += vec_x[i]*vec_x[i]
+                sumvec_y_2 += vec_y[i]*vec_y[i]
+            pearson_correlation = sum_vec_x_vec_y/(math.sqrt(sum_vec_xi_2)*math.sqrt(sum_vec_yi_2))
+            cosine_similarity = sumvec_xvec_y/(math.sqrt(sumvec_x_2)*math.sqrt(sumvec_y_2))
             return(pearson_correlation,cosine_similarity)
     
     # =============================================================================
@@ -218,15 +221,15 @@ def get_recommendations(quar, num_best_cust, num_best_prod, conf):
 # =============================================================================
 # End of Get Recommendations Algorithm
 # =============================================================================
-global a
+global user_inputs
 def getCust():
     global SelectCust
     global selectCust
     global selectCustOM
-    global a
-    a = get_recommendations(quarter.get(),int(customers.get()),int(products.get()),float(confidence.get()))
-    print(a)
-    custNames = list(pd.unique(a.Name))
+    global user_inputs
+    user_inputs = get_recommendations(quarter.get(),int(customers.get()),int(products.get()),float(confidence.get()))
+    print(user_inputs)
+    custNames = list(pd.unique(user_inputs.Name))
     SelectCust = custNames
     selectCustOM = tk.OptionMenu(root,selectCust,*SelectCust)
     selectCustOM.place(relx = 0.2, rely = 0.38)
@@ -245,9 +248,9 @@ dispProdLabel = tk.Label(root, text='Product Recommendation')
 dispProdLabel.configure(background='RoyalBlue3',fg = 'white')
 dispProdLabel.place(relx = 0.663, rely = 0.33)
 def showProd():
-    global a
+    global user_inputs
     name = selectCust.get()
-    pro = list(a[a['Name']==name]['Product'])
+    pro = list(user_inputs[user_inputs['Name']==name]['Product'])
     listBoxProd.delete(0,listBoxProd.size())
     for i in range(len(pro)):
         listBoxProd.insert(i, pro[i][0:min(len(pro[i]),48)])
