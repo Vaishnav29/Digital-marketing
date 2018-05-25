@@ -33,7 +33,7 @@ sep = ttk.Separator(root, orient=VERTICAL)
 sep.grid(column=10, row=0, rowspan=20, sticky=NS)
 
 
-
+# list of email IDs of customers who like certain sub-category products
 one = ['reddy.vaishnav96@gmail.com']
 two = ['premalathanair@gmail.com']
 three=['madhuhasareddy@gmail.com']
@@ -55,7 +55,7 @@ seventeen=['shyamalayadav09@gmail.com']
 subcust=[]
 subcust=[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen]
 
-#
+# function for sending mails to customers who are liking particular products coming under a sub-category
 def sendmail():
     print(k)
     global message
@@ -96,6 +96,7 @@ nine1=['reddy.vaishnav96@gmail.com']
 subcust1=[]
 subcust1=[one1,two1,three1,four1,five1,six1,seven1,eight1,nine1]
 
+# function for sending mails to customers of particular cluster
 def sendmail1():
     print(x)
     global message
@@ -129,6 +130,7 @@ def sendmail1():
         messagebox.showinfo("Status", "Promotions have been sent!!!")
         s.quit()
 
+# function to get favorite products for the customers of selected cluster
 def getproduct(value):
     global uniquep
     global listbox2
@@ -223,6 +225,7 @@ def getproduct(value):
         listbox2.insert(END, i)
     listbox2.forget()    
 
+# function to get customers liking selected products of sub-category
 def getcustomer(value):
     print(sub.get())
     i = 1
@@ -250,7 +253,7 @@ def getcustomer(value):
     listbox4.delete(0, END)
     listbox4.insert(END, p)      
 
-# cluster
+# widgets for clusters
 Label(root,  text='Marketing on Customers of different groups', background='RoyalBlue3', fg = 'white', font=("Helvetica", 13,'bold', 'underline')).place(relx = 0.04, rely = 0.01)   
 Label(root,  text='Marketing on product categories', background='RoyalBlue3', fg = 'white', font=("Helvetica", 13,'bold', 'underline')).place(relx = 0.6, rely = 0.01)   
 
@@ -281,7 +284,7 @@ bp.place(relx = 0.1, rely = 0.21)
 offerLabel = Label(root,text='Products frequentyly bought by these customers: ', background='RoyalBlue3', fg = 'white')
 offerLabel.place(relx = 0.05, rely = 0.55)
 
-# sub categories
+# widgets for sub categories
 listbox3 = Listbox(root, width = 30, height = 15)
 listbox3.place(relx = 0.75, rely = 0.47, anchor = "center")
 listbox4 = Listbox(root, height = 0, width = 3)
@@ -310,5 +313,5 @@ sp.place(relx = 0.12, rely = 0.89)
 sp1 = Button(root, text = "Send Promotions",command= sendmail, width = 20, fg = 'black')
 sp1.place(relx = 0.7, rely = 0.85)
 
-
+# to run gui
 root.mainloop()
