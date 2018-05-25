@@ -1,3 +1,4 @@
+# importing libraries and pickle files
 import pandas as pd
 import numpy as np
 import pickle
@@ -7,12 +8,8 @@ l = pickle.load(open("l.p", "rb"))
 lis_inv = pickle.load(open("lis_inv.p", "rb"))
 lis_inv_sold_per = pickle.load(open("lis_inv_sold_per.p", "rb"))
 
+# function to create dataframe containing profit, quantity, price for every product for the given year and month
 def sorted_profit(year,mon):
-    #data = pd.read_excel("store-dataset1.xlsx")
-    #data = data.sort_values(by='Order Date')
-    #Converting the Date field from string to Date object
-    #data['Order Date'] = pd.to_datetime(data['Order Date'])
-    #data['Ship Date'] = pd.to_datetime(data['Ship Date'])
     firstyear= pickle.load(open("firstyear.p", "rb"))
     secondyear= pickle.load(open("secondyear.p", "rb"))
     thirdyear= pickle.load(open("thirdyear.p", "rb"))
@@ -80,7 +77,7 @@ def sorted_profit(year,mon):
     d_os1 = d_os1.reset_index()
     return d_os1
 
-
+# function to get the sales for the given year and month
 def predicted_sales(year,mon,pname):
     lis = [0,0,0]
    
